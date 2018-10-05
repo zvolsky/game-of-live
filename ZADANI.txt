@@ -1,0 +1,74 @@
+============
+Game of Life
+============
+
+Vaším úkolem je implementovat Game of Life.
+
+https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+
+Svět je 2D-periodický. Periody jsou určeny velikostí vstupních dat.
+
+
+-----------------
+Funkční požadavky
+-----------------
+
+Aplikace konzumuje na vstupu svět reprezentovaný maticí složenou ze znaků 0 a 1.
+
+Znak 0 značí mrtvou buňku, znak 1 značí živou buňku.
+
+Periody jsou dány rozměry matice.
+
+Příklad (beehive, matice 5x6, perioda 5 vertikálně, perioda 6 horizontálně):
+
+000000
+001100
+010010
+001100
+000000
+
+Výstupem je svět v následující iteraci a v témže formátu.
+
+Proces musí v případě úspěchu skončit s výstupní kódem 0.
+
+Aplikace musí správně fungovat v Pythonu 3.6.
+
+Při nevalidním vstupu aplikace skončí s nenulovým kódem.
+
+
+----------------
+Akceptační testy
+----------------
+
+Aplikace musí vyhovovat akceptačním testům v `test_cli.py`.
+
+Testy vyžadují pytest a spouští se obvyklým způsobem (např. `pytest` v tomto adresáři).
+
+Defaultní jméno aplikace je 'game-of-life'. Alternativní jméno aplikace může
+být předáno proměnnou prostředí GAME_OF_LIFE.
+
+
+-------------------
+Nefunkční požadavky
+-------------------
+
+Aplikace používá pouze standardní knihovnu.
+
+Aplikace by měla být distribuována rozumnou formou. Níže uvedené požadavky
+nejsou dogmatické, ale jsou spíše návrhem, jak zajistit, aby
+
+1. bylo možno aplikaci rozumně nainstalovat,
+2. bylo možno rozumně spustit testy.
+
+Aplikace bude odevzdána buď jako jako archiv *.tar.gz (nebo git bundle)
+obsahující adresář se setup.py (dále kořenový adresář).
+
+Spuštěním `python setup.py install` se nainstaluje spustitelná aplikace `game-of-life`.
+
+Kořenový adresář bude dále obsahovat adresář `tests` obsahující testy.
+
+Výsledkem `pytest --cov-branch --cov gameoflife tests` musí být coverage 100%.
+
+Výše uvedené předpokládá, že se bude balíček/modul jmenovat `gameoflife`.
+
+Závislosti pro testy musí být uvedeny v souboru `requirements-test.txt` (včetně pytest a pytest-cov).
