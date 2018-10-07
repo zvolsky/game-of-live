@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-# {'stdin': <_io.BufferedReader name='/home/mirek/dj/pokus/openstreettraffic_web/task/lives/beacon-6x6/0.txt'>}
-# parser.add_argument('app_name', nargs='*', type=str, help=_("0, 1 nebo vice (oddelit mezerami) aplikaci, kde se test provede; nepouzito: proved ve vsech aplikacich"))
+import sys
+
 
 def get_next_one(wint):
     """
@@ -19,7 +19,7 @@ def get_next_one(wint):
         # return divmod(i, rows)[1] , but lets optimize this a little
         if 0 <= i < rows:
             return i
-        return divmod(i, rows)[1]
+        return i % rows
 
     def fixed_j(j):
         if 0 <= j < cols:
@@ -45,13 +45,6 @@ def get_next_one(wint):
     
     return next_one
 
-world = [
-    '111',
-    '000',
-    '000',
-    '111',
-]
-
 def word_to_int(world):
     """
         converts list of strings (where each char is an element) into array of integers 0|1
@@ -64,7 +57,7 @@ def word_to_int(world):
 
 def validated_world(world):
     if type(world) not in (tuple, list) or len(world) == 0:
-        raise TypeError('not a non empty list')
+        raise TypeError('need a non empty list')
     cols = None
     for row in world:
         if type(row) != str:
@@ -79,14 +72,24 @@ def validated_world(world):
             raise TypeError('allowed characters are: 01')
     return world
 
+def from_stdin():
+    console = sys.stdin.isatty()
+    world = []
+    row_no = 1
+    while True:
+        try:
+            row = input(('row %s (empty to start) : ' % row_no) if console else '')
+        except EOFError:
+            break
+        if not row:
+            break
+        world.append(row)
+        row_no += 1
+    main(world)
 
-for row in get_next_one(word_to_int(validated_world(world))):
-    print(row)
+def main(world):
+    for row in get_next_one(word_to_int(validated_world(world))):
+        print(row)
 
-"""
-import argparse
-
-pass
-aa = input('prompt: ')
-pass
-"""
+if __name__ == '__main__':
+    from_stdin()
